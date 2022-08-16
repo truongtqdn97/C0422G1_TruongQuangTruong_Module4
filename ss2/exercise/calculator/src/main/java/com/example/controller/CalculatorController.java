@@ -20,29 +20,12 @@ public class CalculatorController {
 
     @PostMapping("/calculate")
     public String calculate(@RequestParam String operator,
-                            double num1,
-                            double num2,
+                            String num1,
+                            String num2,
                             Model model){
         model.addAttribute("num1", num1);
         model.addAttribute("num2", num2);
-        switch (operator){
-            case "add":
-                model.addAttribute("result", this.iCalculatorService.add(num1, num2));
-                break;
-            case "subtract":
-                model.addAttribute("result", this.iCalculatorService.subtract(num1, num2));
-                break;
-            case "multiply":
-                model.addAttribute("result", this.iCalculatorService.multiply(num1, num2));
-                break;
-            case "divide":
-                try {
-                    model.addAttribute("result", this.iCalculatorService.divide(num1, num2));
-                }catch (ArithmeticException e){
-                    model.addAttribute("result", e.getMessage());
-                }
-                break;
-        }
+        model.addAttribute("result", this.iCalculatorService.calculate(num1, num2, operator));
         return "calculator";
     }
 }
