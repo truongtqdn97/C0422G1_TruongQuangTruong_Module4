@@ -15,6 +15,9 @@
 <c:if test="${msgCreate!=null}">
     <p class="text-success" style="text-align: center">${msgCreate}</p>
 </c:if>
+<c:if test="${msgUpdate!=null}">
+    <p class="text-success" style="text-align: center">${msgUpdate}</p>
+</c:if>
 <table class="table table-striped">
     <thead>
     <tr class="table-info">
