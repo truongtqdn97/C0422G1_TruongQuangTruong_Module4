@@ -1,5 +1,7 @@
 package com.example.repository;
 
+import com.example.model.Medical;
+
 import java.util.List;
 
 public interface IMedicalRepository {
@@ -16,4 +18,10 @@ public interface IMedicalRepository {
     List<String> showYearList();
 
     List<String> showYearOfBirth();
+
+    List<Medical> showMedicalList();
+
+    void save(Medical medical);
+
+    Medical findById(int medicalId);
 }

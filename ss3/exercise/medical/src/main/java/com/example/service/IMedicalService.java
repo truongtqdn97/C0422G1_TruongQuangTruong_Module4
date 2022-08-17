@@ -1,5 +1,7 @@
 package com.example.service;
 
+import com.example.model.Medical;
+
 import java.util.List;
 
 public interface IMedicalService {
@@ -16,4 +18,10 @@ public interface IMedicalService {
     List<String> showYearList();
 
     List<String> showYearOfBirth();
+
+    List<Medical> showMedicalList();
+
+    void save(Medical medical);
+
+    Medical findById(int medicalId);
 }

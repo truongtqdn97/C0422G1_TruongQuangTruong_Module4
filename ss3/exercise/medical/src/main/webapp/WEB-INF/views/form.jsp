@@ -19,7 +19,10 @@
     và có thể xử lý hình sự
 </p>
 
-<form:form action="/send" method="post" modelAttribute="medical">
+<form:form action="/create" method="post" modelAttribute="medical">
+    <div>
+        <form:hidden path="medicalId"/>
+    </div>
     <div>Họ tên (ghi chữ IN HOA) <span>(*)</span> </div>
     <div>
         <form:input path="name"/>
@@ -106,7 +109,9 @@
     <div>
         <form:input path="city"/>
     </div>
-
+    <input type="submit" value="Gửi">
+    <input type="reset" value="Huỷ">
+    <a href="/">Quay lại</a>
 </form:form>
 
 </body>
