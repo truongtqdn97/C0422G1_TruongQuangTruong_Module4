@@ -45,17 +45,17 @@ public class ProductController {
         return "redirect:/";
     }
 
-    @GetMapping("/remove/{pId}")
-    public String showRemove(@PathVariable int pId,
-                             Model model){
-        model.addAttribute("productObj", this.iProductService.findById(pId));
-        return "remove";
-    }
+//    @GetMapping("/remove/{pId}")
+//    public String showRemove(@PathVariable int pId,
+//                             Model model){
+//        model.addAttribute("productObj", this.iProductService.findById(pId));
+//        return "remove";
+//    }
 
-    @PostMapping("/remove/{pId}")
-    public String remove(@PathVariable int pId,
+    @PostMapping("/remove")
+    public String remove(@RequestParam int removeId,
                          RedirectAttributes redirectAttributes){
-        this.iProductService.remove(pId);
+        this.iProductService.remove(removeId);
         redirectAttributes.addFlashAttribute("msg", "Delete successfully!");
         return "redirect:/";
     }
