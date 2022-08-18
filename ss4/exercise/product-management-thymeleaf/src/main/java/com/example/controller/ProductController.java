@@ -16,30 +16,30 @@ public class ProductController {
     private IProductService iProductService;
 
     @GetMapping("/")
-    public String view(Model model){
+    public String view(Model model) {
         model.addAttribute("productList", this.iProductService.showProductList());
         return "view";
     }
 
     @GetMapping("/detail/{pId}")
-    public String showDetail(@PathVariable int pId, Model model){
+    public String showDetail(@PathVariable int pId, Model model) {
         model.addAttribute("productObj", this.iProductService.findById(pId));
         return "detail";
     }
 
     @GetMapping("/showCreateForm")
-    public String showCreateForm(Model model){
+    public String showCreateForm(Model model) {
         model.addAttribute("product", new Product());
         return "create";
     }
 
     @PostMapping("/create")
     public String create(@ModelAttribute Product product,
-                         RedirectAttributes redirectAttributes){
+                         RedirectAttributes redirectAttributes) {
         List<Product> productList = this.iProductService.showProductList();
-        if (productList.isEmpty()){
+        if (productList.isEmpty()) {
             product.setpId(1);
-        }else product.setpId(productList.get(productList.size()-1).getpId()+1);
+        } else product.setpId(productList.get(productList.size() - 1).getpId() + 1);
         this.iProductService.save(product);
         redirectAttributes.addFlashAttribute("msg", "Create successfully!");
         return "redirect:/";
@@ -54,7 +54,7 @@ public class ProductController {
 
     @PostMapping("/remove")
     public String remove(@RequestParam int removeId,
-                         RedirectAttributes redirectAttributes){
+                         RedirectAttributes redirectAttributes) {
         this.iProductService.remove(removeId);
         redirectAttributes.addFlashAttribute("msg", "Delete successfully!");
         return "redirect:/";
@@ -62,14 +62,14 @@ public class ProductController {
 
     @GetMapping("/update/{pId}")
     public String updateForm(@PathVariable int pId,
-                             Model model){
+                             Model model) {
         model.addAttribute("productObj", this.iProductService.findById(pId));
         return "update";
     }
 
     @PostMapping("/update")
     public String update(@ModelAttribute Product product,
-                         RedirectAttributes redirectAttributes){
+                         RedirectAttributes redirectAttributes) {
         this.iProductService.save(product);
         redirectAttributes.addFlashAttribute("msg", "Update successfully!");
         return "redirect:/";
@@ -77,7 +77,7 @@ public class ProductController {
 
     @GetMapping("/search")
     public String search(@RequestParam String nameSearch,
-                         Model model){
+                         Model model) {
         model.addAttribute("productList", this.iProductService.findByName(nameSearch));
 //        model.addAttribute("notice", true);
         return "view";

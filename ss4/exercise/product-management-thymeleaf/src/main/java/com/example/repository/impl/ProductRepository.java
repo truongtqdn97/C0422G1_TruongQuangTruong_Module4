@@ -12,6 +12,7 @@ import java.util.Map;
 @Repository
 public class ProductRepository implements IProductRepository {
     private static Map<Integer, Product> productMap = new HashMap<>();
+
     static {
         //(int pId, String pName, int pPrice, String pDescription, String pManufacturer)
         productMap.put(1, new Product(1, "headphone", 1000, "ngon vcl", "Sony"));
@@ -46,8 +47,8 @@ public class ProductRepository implements IProductRepository {
     public List<Product> findByName(String pName) {
         List<Product> productList = new ArrayList<>(productMap.values());
         List<Product> products = new ArrayList<>();
-        for (Product product:productList){
-            if (product.getpName().contains(pName)){
+        for (Product product : productList) {
+            if (product.getpName().contains(pName)) {
                 products.add(product);
             }
         }

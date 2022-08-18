@@ -70,11 +70,6 @@
                     th:onclick="|showRemove('${productObj.pId}','${productObj.pName}')|">
                 Delete
             </button>
-            <!--            <button class="btn btn-outline-warning">-->
-            <!--                <a th:href="@{/remove/{pId}(pId=${productObj.pId})}" class="text-decoration-none text-dark">-->
-            <!--                    Delete-->
-            <!--                </a>-->
-            <!--            </button>-->
         </td>
     </tr>
     </tbody>
@@ -108,7 +103,6 @@
         document.getElementById("removeId").value = removeId;
     }
 </script>
-
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
