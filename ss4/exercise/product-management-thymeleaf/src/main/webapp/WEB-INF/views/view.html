@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+
+<h1 style="text-align: center">Product List</h1>
+<div class="row">
+    <div class="col-6">
+        <button class="btn btn-primary">
+            <a th:href="@{/showCreateForm}" class="text-light text-decoration-none">
+                Create new Product
+            </a>
+        </button>
+    </div>
+    <div class="col-3"></div>
+    <div class="col-3">
+        <form class="d-flex" action="/search">
+            <input class="form-control me-2" type="search"
+                   placeholder="Search" aria-label="Search"
+            name="nameSearch">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+</div>
+
+
+
+<p style="text-align: center" th:if="${msg}">
+    <span th:text="${msg}" class="text-success"></span>
+</p>
+<table class="table table-striped table-hover">
+    <thead>
+    <tr class="table-dark">
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Description</th>
+        <th scope="col">Manufacturer</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="productObj, loop: ${productList}">
+        <th scope="row" th:text="${loop.count}"></th>
+        <td>
+            <a th:href="@{/detail/{pId}(pId=${productObj.getpId()})}" class="text-decoration-none">
+                <span th:text="${productObj.pName}"></span>
+            </a>
+        </td>
+        <td th:text="${productObj.pPrice}"></td>
+        <td th:text="${productObj.pDescription}"></td>
+        <td th:text="${productObj.pManufacturer}"></td>
+        <td>
+            <button class="btn btn-outline-success">
+                <a th:href="@{/update/{pId}(pId=${productObj.pId})}" class="text-decoration-none text-dark">
+                    Update
+                </a>
+            </button>
+        </td>
+        <td>
+            <button class="btn btn-outline-warning">
+                <a th:href="@{/remove/{pId}(pId=${productObj.pId})}" class="text-decoration-none text-dark">
+                    Delete
+                </a>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+</html>

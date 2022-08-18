@@ -50,7 +50,6 @@
             <td><a href="/updateForm/${medical.medicalId}">Sửa</a></td>
         </tr>
     </c:forEach>
-
     </tbody>
 </table>
 

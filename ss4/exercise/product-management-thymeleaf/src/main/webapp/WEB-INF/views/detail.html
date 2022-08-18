@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Detail</title>
+</head>
+<body>
+
+<fieldset>
+    <legend>Product Detail</legend>
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>: <span th:text="${productObj.pName}"></span></td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td>: <span th:text="${productObj.pPrice}"></span></td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>: <span th:text="${productObj.pDescription}"></span></td>
+        </tr>
+        <tr>
+            <td>Manufacturer</td>
+            <td>: <span th:text="${productObj.pManufacturer}"></span></td>
+        </tr>
+    </table>
+</fieldset>
+
+</body>
+</html>

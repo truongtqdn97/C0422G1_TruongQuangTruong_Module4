@@ -5,7 +5,6 @@ import com.example.repository.IMedicalRepository;
 import com.example.service.IMedicalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

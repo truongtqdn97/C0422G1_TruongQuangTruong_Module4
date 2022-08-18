@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Deleting Confirm</title>
+</head>
+<body>
+<button class="btn btn-outline-primary">
+    <a href="/" class="text-decoration-none">
+        Return Product List
+    </a>
+</button>
+
+<form th:action="@{/remove/{pId}(pId=${productObj.pId})}" method="post">
+    <fieldset>
+        <legend>Deleting Confirm</legend>
+        <table>
+            <tr>
+                <th colspan="2">
+                    Do you really want to delete this product from the list?
+                </th>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>: <span th:text="${productObj.pName}"></span></td>
+            </tr>
+            <tr>
+                <td>Price</td>
+                <td>: <span th:text="${productObj.pPrice}"></span></td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td>: <span th:text="${productObj.pDescription}"></span></td>
+            </tr>
+            <tr>
+                <td>Manufacturer</td>
+                <td>: <span th:text="${productObj.pManufacturer}"></span></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="submit" class="btn btn-danger">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</form>
+</body>
+</html>
