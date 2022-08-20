@@ -5,13 +5,11 @@ import com.example.model.Product;
 import java.util.List;
 
 public interface IProductRepository {
-    List<Product> showProductList();
+    List<Product> showProductList(String pName);
 
     void save(Product product);
 
     void remove(int pId);
 
     Product findById(int pId);
-
-    List<Product> findByName(String pName);
 }

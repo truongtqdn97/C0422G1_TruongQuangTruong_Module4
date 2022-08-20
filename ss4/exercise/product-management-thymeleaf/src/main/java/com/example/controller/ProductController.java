@@ -17,7 +17,7 @@ public class ProductController {
 
     @GetMapping("/")
     public String view(Model model) {
-        model.addAttribute("productList", this.iProductService.showProductList());
+        model.addAttribute("productList", this.iProductService.showProductList(""));
         return "view";
     }
 
@@ -36,7 +36,7 @@ public class ProductController {
     @PostMapping("/create")
     public String create(@ModelAttribute Product product,
                          RedirectAttributes redirectAttributes) {
-        List<Product> productList = this.iProductService.showProductList();
+        List<Product> productList = this.iProductService.showProductList("");
         if (productList.isEmpty()) {
             product.setpId(1);
         } else product.setpId(productList.get(productList.size() - 1).getpId() + 1);
@@ -76,10 +76,8 @@ public class ProductController {
     }
 
     @GetMapping("/search")
-    public String search(@RequestParam String nameSearch,
-                         Model model) {
-        model.addAttribute("productList", this.iProductService.findByName(nameSearch));
-//        model.addAttribute("notice", true);
+    public String search(@RequestParam String nameSearch, Model model){
+        model.addAttribute("productList", this.iProductService.showProductList(nameSearch));
         return "view";
     }
 }

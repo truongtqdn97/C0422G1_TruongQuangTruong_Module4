@@ -24,8 +24,18 @@ public class ProductRepository implements IProductRepository {
 
 
     @Override
-    public List<Product> showProductList() {
-        return new ArrayList<>(productMap.values());
+    public List<Product> showProductList(String pName) {
+        List<Product> productList = new ArrayList<>(productMap.values());
+        if (pName.equals("")){
+            return productList;
+        }
+        List<Product> products = new ArrayList<>();
+        for (Product product : productList) {
+            if (product.getpName().contains(pName)) {
+                products.add(product);
+            }
+        }
+        return products;
     }
 
     @Override
@@ -43,15 +53,4 @@ public class ProductRepository implements IProductRepository {
         return productMap.get(pId);
     }
 
-    @Override
-    public List<Product> findByName(String pName) {
-        List<Product> productList = new ArrayList<>(productMap.values());
-        List<Product> products = new ArrayList<>();
-        for (Product product : productList) {
-            if (product.getpName().contains(pName)) {
-                products.add(product);
-            }
-        }
-        return products;
-    }
 }

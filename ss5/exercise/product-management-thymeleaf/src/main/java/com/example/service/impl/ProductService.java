@@ -1,0 +1,40 @@
+package com.example.service.impl;
+
+import com.example.model.Product;
+import com.example.repository.IProductRepository;
+import com.example.service.IProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class ProductService implements IProductService {
+    @Autowired
+    private IProductRepository iProductRepository;
+
+    @Override
+    public List<Product> showProductList(String pName) {
+        return this.iProductRepository.showProductList(pName);
+    }
+
+    @Override
+    public void save(Product product) {
+        this.iProductRepository.save(product);
+    }
+
+    @Override
+    public void remove(int pId) {
+        this.iProductRepository.remove(pId);
+    }
+
+    @Override
+    public void update(Product product) {
+        this.iProductRepository.update(product);
+    }
+
+    @Override
+    public Product findById(int pId) {
+        return this.iProductRepository.findById(pId);
+    }
+}

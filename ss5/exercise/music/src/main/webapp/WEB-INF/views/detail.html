@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+</head>
+<body>
+
+<fieldset>
+    <legend>Song 's Detail</legend>
+    <table>
+        <tr>
+            <th>ID</th>
+            <td th:text="${musicObj.id}"></td>
+        </tr>
+        <tr>
+            <th>Name Song</th>
+            <td th:text="${musicObj.name}"></td>
+        </tr>
+        <tr>
+            <th>Singer</th>
+            <td th:text="${musicObj.singer}"></td>
+        </tr>
+        <tr>
+            <th>Type Song</th>
+            <td th:text="${musicObj.type}"></td>
+        </tr>
+        <tr>
+            <th>Link</th>
+            <td>
+                <audio controls>
+                    <source th:src="@{'file/' + ${musicObj.path}}">
+                </audio>
+            </td>
+        </tr>
+    </table>
+</fieldset>
+
+<a href="/" style="text-decoration: none">Return to list</a>
+
+</body>
+</html>

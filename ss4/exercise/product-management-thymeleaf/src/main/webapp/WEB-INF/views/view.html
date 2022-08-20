@@ -7,7 +7,7 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
-
+<nav th:replace="~{common :: navbar}"></nav>
 <h1 style="text-align: center">Product List</h1>
 <div class="row">
     <div class="col-6">
@@ -17,7 +17,9 @@
             </a>
         </button>
     </div>
-    <div class="col-3"></div>
+    <div class="col-3">
+<!--        <a th:if="${notice}" href="/" class="text-decoration-none">list</a>-->
+    </div>
     <div class="col-3">
         <form class="d-flex" action="/search">
             <input class="form-control me-2" type="search"
@@ -47,7 +49,7 @@
     <tr th:each="productObj, loop: ${productList}">
         <th scope="row" th:text="${loop.count}"></th>
         <td>
-            <a th:href="@{/detail/{pId}(pId=${productObj.getpId()})}" class="text-decoration-none">
+            <a th:href="@{/detail/{pId}(pId=${productObj.pId})}" class="text-decoration-none">
                 <span th:text="${productObj.pName}"></span>
             </a>
         </td>

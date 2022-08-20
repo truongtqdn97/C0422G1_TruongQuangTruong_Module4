@@ -14,8 +14,8 @@ public class ProductService implements IProductService {
     private IProductRepository iProductRepository;
 
     @Override
-    public List<Product> showProductList() {
-        return this.iProductRepository.showProductList();
+    public List<Product> showProductList(String pName) {
+        return this.iProductRepository.showProductList(pName);
     }
 
     @Override
@@ -31,10 +31,5 @@ public class ProductService implements IProductService {
     @Override
     public Product findById(int pId) {
         return this.iProductRepository.findById(pId);
-    }
-
-    @Override
-    public List<Product> findByName(String pName) {
-        return this.iProductRepository.findByName(pName);
     }
 }
