@@ -12,21 +12,19 @@ import java.util.List;
 @Repository
 public class ProductRepository implements IProductRepository {
     private static final String SELECT_ALL = "select p from Product p";
+    private static final String SELECT = "select p from Product p where p.pName like :pName";
 
     @Override
     public List<Product> showProductList(String pName) {
         TypedQuery<Product> productTypedQuery =
                 BaseRepository.entityManager.createQuery(SELECT_ALL, Product.class);
-        List<Product> productList = new ArrayList<>();
-        if (pName.equals("")){
+//        List<Product> productList = new ArrayList<>();
+        if (pName==null){
             return productTypedQuery.getResultList();
         }else {
-            for (Product product:productTypedQuery.getResultList()){
-                if (product.getpName().contains(pName)){
-                    productList.add(product);
-                }
-            }
-            return productList;
+            productTypedQuery = BaseRepository.entityManager.createQuery(SELECT, Product.class);
+            productTypedQuery.setParameter("pName", "%"+pName+"%");
+            return productTypedQuery.getResultList();
         }
     }
 

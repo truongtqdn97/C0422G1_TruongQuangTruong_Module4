@@ -16,8 +16,8 @@ public class ProductController {
     private IProductService iProductService;
 
     @GetMapping("/")
-    public String view(Model model) {
-        model.addAttribute("productList", this.iProductService.showProductList(""));
+    public String view(Model model, String nameSearch) {
+        model.addAttribute("productList", this.iProductService.showProductList(nameSearch));
         return "view";
     }
 
@@ -64,9 +64,9 @@ public class ProductController {
         return "redirect:/";
     }
 
-    @GetMapping("/search")
-    public String search(@RequestParam String nameSearch, Model model) {
-        model.addAttribute("productList", this.iProductService.showProductList(nameSearch));
-        return "view";
-    }
+//    @GetMapping("/search")
+//    public String search(@RequestParam String nameSearch, Model model) {
+//        model.addAttribute("productList", this.iProductService.showProductList(nameSearch));
+//        return "view";
+//    }
 }
