@@ -3,7 +3,6 @@ package com.codegym.cms.repository.impl;
 import com.codegym.cms.model.Customer;
 import com.codegym.cms.repository.ICustomerRepository;
 
-import com.codegym.cms.model.Customer;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
