@@ -15,7 +15,7 @@
                   enctype="multipart/form-data">
                 <input type="hidden" th:field="*{id}">
                 <div class="row">
-                    Name of song:
+                    Name of song: &#x261B;&#x261A;
                 </div>
                 <div class="row">
                     <input type="text" th:field="*{name}" class="form-control">
@@ -36,7 +36,7 @@
                     Link:
                 </div>
                 <div class="row">
-                    <input type="file" th:field="*{path}" class="form-control">
+                    <input type="file" accept="audio/*" th:field="*{path}" class="form-control">
                 </div>
                 <div>
                     <button type="submit" class="btn btn-primary">Add</button>
