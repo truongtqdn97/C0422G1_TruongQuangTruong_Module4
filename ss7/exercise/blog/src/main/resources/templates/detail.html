@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+
+<h1>Detail of Blog</h1>
+<a href="/" class="btn btn-primary text-decoration-none">Return to list</a>
+<div class="container">
+    <table>
+        <tr>
+            <th>Topic</th>
+            <td>: <span th:text="${blogObj.bTopic}"></span></td>
+        </tr>
+        <tr>
+            <th>Content</th>
+            <td>: <span th:text="${blogObj.bContent}"></span></td>
+        </tr>
+        <tr>
+            <th>Category</th>
+            <td>: <span th:text="${blogObj.category.cName}"></span></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

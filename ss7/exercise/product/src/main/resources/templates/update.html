@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common :: head}">
+    <meta charset="UTF-8">
+    <title>Update Product</title>
+</head>
+<body>
+<nav th:replace="~{common :: navbar}"></nav>
+
+<h3>Form Update Product</h3>
+
+<button class="btn btn-outline-primary">
+    <a href="/" class="text-decoration-none">
+        Return Product List
+    </a>
+</button>
+
+<form action="/update" method="post" th:object="${productObj}">
+    <table>
+        <input type="hidden" th:field="*{pId}">
+        <tr>
+            <td>Name</td>
+            <td>
+                <input type="text" th:field="*{name}" class="form-control">
+            </td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td>
+                <input type="number" th:field="*{pPrice}" class="form-control">
+            </td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>
+                <input type="text" th:field="*{pDescription}" class="form-control">
+            </td>
+        </tr>
+        <tr>
+            <td>Manufacturer</td>
+            <td>
+                <input type="text" th:field="*{pManufacturer}" class="form-control">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Update">
+            </td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

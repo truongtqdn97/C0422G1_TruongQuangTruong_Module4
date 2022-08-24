@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 d-flex justify-content-center">
+            <fieldset>
+                <legend>Write a new blog</legend>
+                <form action="/edit" method="post" th:object="${blogObj}">
+                    <table>
+                        <input type="hidden" th:field="*{bId}">
+                        <tr>
+                            <th>Name of Topic:</th>
+                            <td>
+                                <input type="text" th:field="*{bTopic}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Content:</th>
+                            <td>
+                                <textarea type="text" th:field="*{bContent}" class="form-control"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Category</th>
+                            <td>
+                                <select th:field="*{category}" class="form-select">
+                                    <option th:each="category1: ${categories}"
+                                            th:value="${category1.cId}" th:text="${category1.cName}">
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                        <input type="hidden" th:field="*{bTime}">
+                        <tr>
+                            <td><input type="submit" value="Update" class="btn btn-primary"></td>
+                            <td><a href="/" class="btn btn-outline-warning text-decoration-none">Return to list</a>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </fieldset>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

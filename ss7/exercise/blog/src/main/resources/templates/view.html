@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Blogs</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="row">
+    <div class="col-md-12 d-flex justify-content-center">
+        <a href="/" class="text-decoration-none text-dark">
+            <h1>Welcome to App Blog</h1>
+        </a>
+    </div>
+</div>
+<div class="container mb-2">
+    <div class="row">
+        <div class="col-md-2">
+                <a href="/showForm" class="btn btn-primary">
+                    Write a blog &#9997;
+                </a>
+        </div>
+        <div class="col-md-2">
+            <p th:if="${msg}">
+                <span th:text="${msg}" class="text-success"></span>
+            </p>
+        </div>
+        <div class="col-md-2">
+            <form action="/" class="d-flex">
+                <select name="categoryVar" th:object="${categoryVar}">
+                    <option th:each="cate : ${categories}"
+                            value="${cate}"
+                            th:text="${cate.cName}"></option>
+                </select>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <form action="/" class="d-flex">
+                <input class="form-control me-2" type="search"
+                       placeholder="Search"
+                       aria-label="Search"
+                        name="searchTopic">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped table-hover">
+            <tr class="table-dark">
+                <th>#</th>
+                <th>Id</th>
+                <th>Topic</th>
+                <th>Content</th>
+                <th>Category</th>
+                <th>Time</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            <tr th:each="blogObj, loop: ${blogList}">
+                <td th:text="${loop.count}"></td>
+                <td th:text="${blogObj.bId}"></td>
+                <td>
+                    <a th:href="@{/detail/{bId}(bId=${blogObj.bId})}" class="text-decoration-none">
+                        <span th:text="${blogObj.bTopic}"></span>
+                    </a>
+                </td>
+                <td th:text="${blogObj.bContent}"></td>
+                <td th:text="${blogObj.category.cName}"></td>
+                <td th:text="${blogObj.bTime}"></td>
+                <td>
+                    <a th:href="@{/edit/{bId}(bId=${blogObj.bId})}" class="btn btn-outline-success">
+                        Update
+                    </a>
+                </td>
+                <td>
+                    <!-- Button trigger modal -->
+                    <button type="button"
+                            class="btn btn-outline-danger"
+                            data-bs-toggle="modal"
+                                data-bs-target="#deleteModal"
+                            th:attr="onclick=|showRemove('${blogObj.bId}','${blogObj.bTopic}')|">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <a th:href="@{/(page=${blogList.number - 1},
+        searchTopic=${searchTopic})}"
+        th:if="${blogList.hasPrevious()}">
+            Previous
+        </a>
+        <span th:text="${blogList.number+1}"></span>
+        /
+        <span th:text="${blogList.totalPages}"></span>
+        <a th:href="@{/(page=${blogList.number + 1},
+        searchTopic=${searchTopic})}"
+           th:if="${blogList.hasNext()}">
+            Next
+        </a>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form th:action="@{/remove}" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure about deleting <span id="removeName"></span>?
+                    <input type="hidden" name="removeId" id="removeId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function showRemove(removeId, removeName) {
+        document.getElementById("removeName").innerText = removeName;
+        document.getElementById("removeId").value = removeId;
+    }
+</script>
+
+<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>
