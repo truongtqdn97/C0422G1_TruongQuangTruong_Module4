@@ -26,14 +26,14 @@ public class BlogController {
 
     @GetMapping("/")
     public String view(@RequestParam Optional<String> searchTopic,
-                       @ModelAttribute Category categoryVar,
+                       @ModelAttribute Optional<String> categoryVar,
                        @PageableDefault(size = 2, sort = "bTime", direction = Sort.Direction.DESC) Pageable pageable,
                        Model model){
         String searchTopicValue = searchTopic.orElse("");
-//        Category categoryValue = categoryVar.orElse(null);
-        if (categoryVar!=null){
+        String categoryValue = categoryVar.orElse("");
+        if (!categoryValue.equals("")){
             model.addAttribute("blogList",
-                    this.iBlogService.findByCategory(categoryVar, pageable));
+                    this.iBlogService.findByCategory(categoryValue, pageable));
         }
         else model.addAttribute("blogList",
                 this.iBlogService.findByTopic(searchTopicValue, pageable));

@@ -1,7 +1,6 @@
 package com.kms.blog.service.impl;
 
 import com.kms.blog.model.Blog;
-import com.kms.blog.model.Category;
 import com.kms.blog.repository.IBlogRepository;
 import com.kms.blog.service.IBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +34,8 @@ public class BlogService implements IBlogService {
     }
 
     @Override
-    public Page<Blog> findByCategory(Category category, Pageable pageable) {
-        return this.iBlogRepository.findAllByCategoryContaining(category, pageable);
+    public Page<Blog> findByCategory(String category, Pageable pageable) {
+        return this.iBlogRepository.findAllByCategory_cNameContaining(category, pageable);
     }
 
 }

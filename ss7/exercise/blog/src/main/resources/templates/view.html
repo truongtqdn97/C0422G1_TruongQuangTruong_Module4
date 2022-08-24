@@ -28,12 +28,14 @@
             </p>
         </div>
         <div class="col-md-2">
-            <form action="/" class="d-flex">
-                <select name="categoryVar" th:object="${categoryVar}">
-                    <option th:each="cate : ${categories}"
-                            value="${cate}"
-                            th:text="${cate.cName}"></option>
+            <form action="/" class="d-flex" >
+                <select name="categoryVar">
+                    <option value="">Choose Category</option>
+                    <option th:each="categoryObj : ${categories}"
+                            th:value="${categoryObj.cName}"
+                            th:text="${categoryObj.cName}"></option>
                 </select>
+                <input type="submit" value="go">
             </form>
         </div>
         <div class="col-md-6">
