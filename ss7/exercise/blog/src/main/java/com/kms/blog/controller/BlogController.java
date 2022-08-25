@@ -25,20 +25,17 @@ public class BlogController {
     private ICategoryService iCategoryService;
 
     @GetMapping("/")
-    public String view(@RequestParam Optional<String> searchTopic,
-                       @ModelAttribute Optional<String> categoryVar,
+    public String view(@RequestParam(defaultValue = "") String searchTopic,
+                       @RequestParam(defaultValue = "") String categoryVar,
                        @PageableDefault(size = 2, sort = "bTime", direction = Sort.Direction.DESC) Pageable pageable,
                        Model model){
-        String searchTopicValue = searchTopic.orElse("");
-        String categoryValue = categoryVar.orElse("");
-        if (!categoryValue.equals("")){
+//        String searchTopicValue = searchTopic.orElse("");
+//        String categoryValue = categoryVar.orElse("");
             model.addAttribute("blogList",
-                    this.iBlogService.findByCategory(categoryValue, pageable));
-        }
-        else model.addAttribute("blogList",
-                this.iBlogService.findByTopic(searchTopicValue, pageable));
+                    this.iBlogService.findByCategory(searchTopic, categoryVar, pageable));
+
         model.addAttribute("categories", this.iCategoryService.findAll());
-        model.addAttribute("searchTopic", searchTopicValue);
+        model.addAttribute("searchTopic", searchTopic);
         return "view";
     }
 

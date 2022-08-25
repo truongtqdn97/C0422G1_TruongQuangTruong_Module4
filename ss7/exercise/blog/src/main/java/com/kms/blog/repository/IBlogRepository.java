@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface IBlogRepository extends JpaRepository<Blog, Integer> {
     Page<Blog> findAllBybTopicContaining(String bTopic, Pageable pageable);
 
-    Page<Blog> findAllByCategory_cNameContaining(String category, Pageable pageable);
+    Page<Blog> findAllBybTopicContainingAndCategory_cNameContaining(String bTopic, String category, Pageable pageable);
 }

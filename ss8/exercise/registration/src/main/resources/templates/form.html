@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12 d-flex justify-content-center">
+            <form action="/register" method="post" th:object="${userDto}" class="bg-info bg-gradient rounded-3">
+                <div>
+                    <table>
+                        <tr>
+                            <td>
+                                <label class="form-label">First Name</label>
+                            </td>
+                            <td>
+                                <label class="form-label">Last Name</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" th:field="*{firstName}" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" th:field="*{lastName}" class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-danger" th:errors="*{firstName}"></td>
+                            <td class="text-danger" th:errors="*{lastName}"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <label class="form-label">Phone number</label>
+                </div>
+                <div>
+                    <input type="text" th:field="*{phone}" class="form-control">
+                </div>
+                <div class="text-danger" th:errors="*{phone}"></div>
+                <div>
+                    <label class="form-label">Birthday</label>
+                </div>
+                <div>
+                    <input type="date" th:field="*{birthday}" class="form-control">
+                </div>
+                <div class="text-danger" th:errors="*{birthday}"></div>
+                <div>
+                    <label class="form-label">Email</label>
+                </div>
+                <div>
+                    <input type="text" th:field="*{email}" class="form-control">
+                </div>
+                <div class="text-danger" th:errors="*{email}"></div>
+                <div>
+                    <input type="submit" value="Register" class="btn btn-outline-success mt-3">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

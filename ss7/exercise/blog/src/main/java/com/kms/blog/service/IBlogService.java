@@ -13,5 +13,5 @@ public interface IBlogService {
 
     Page<Blog> findByTopic(String bTopic, Pageable pageable);
 
-    Page<Blog> findByCategory(String category, Pageable pageable);
+    Page<Blog> findByCategory(String category, String bTopic, Pageable pageable);
 }
