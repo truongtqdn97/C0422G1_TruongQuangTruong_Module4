@@ -8,7 +8,7 @@
 <body>
 
 <a href="/form" class="btn btn-outline-success">
-    Create new Music
+    Thêm mới bài hát
 </a>
 <div class="container">
     <div class="row">
@@ -26,7 +26,11 @@
                     <td th:text="${music.name}"></td>
                     <td th:text="${music.artist}"></td>
                     <td th:text="${music.type}"></td>
-                    <td>Chỉnh sửa</td>
+                    <td>
+                        <a th:href="@{/update/{id}(id=${music.id})}" class="btn btn-outline-success">
+                            Update
+                        </a>
+                    </td>
                 </tr>
             </table>
         </div>

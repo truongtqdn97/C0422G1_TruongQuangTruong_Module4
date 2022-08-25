@@ -22,4 +22,9 @@ public class MusicService implements IMusicService {
     public void save(Music music) {
         this.iMusicRepository.save(music);
     }
+
+    @Override
+    public Music findById(int id) {
+        return this.iMusicRepository.findById(id).orElse(null);
+    }
 }

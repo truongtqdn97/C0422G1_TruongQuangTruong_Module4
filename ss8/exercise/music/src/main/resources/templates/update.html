@@ -10,7 +10,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <form action="/create" method="post" th:object="${musicDto}">
+            <form action="/update" method="post" th:object="${musicDto}">
+                <input type="hidden" th:field="*{id}">
                 <div>
                     <label class="form-label">Tên bài hát</label>
                 </div>
@@ -33,7 +34,7 @@
                 </div>
                 <div class="text-danger" th:errors="*{type}"></div>
                 <div>
-                    <input type="submit" value="Tạo mới" class="btn btn-outline-success">
+                    <input type="submit" value="Cập nhật" class="btn btn-outline-success">
                 </div>
             </form>
         </div>
