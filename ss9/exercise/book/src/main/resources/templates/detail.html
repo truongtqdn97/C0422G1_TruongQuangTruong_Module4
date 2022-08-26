@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+
+<div th:replace="list::header"></div>
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <table>
+                <tr>
+                    <th>Tên sách</th>
+                    <td>: <span th:text="${book.name}"></span></td>
+                </tr>
+                <tr>
+                    <th>Số lượng còn lại</th>
+                    <td>: <span th:text="${book.quantity}"></span></td>
+                </tr>
+                <tr>
+                    <th>Tổng số lượng</th>
+                    <td>: <span th:text="${book.stock}"></span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" class="btn btn-outline-primary"
+                                data-bs-toggle="modal"
+                                th:attr="onclick=|confirmRent('${book.id}','${book.name}')|"
+                                data-bs-target="#confirmModal">
+                            Cho thuê
+                        </button>
+                    </td>
+                    <td>
+                        <a href="/" class="btn btn-outline-dark">Hoãn lại</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/rent" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Xác nhận thuê</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Xác nhận cho thuê <span id="rentName"></span>
+                    <input type="hidden" id="rentId" name="rentId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-outline-success">Cho thuê</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function confirmRent(rentId, rentName) {
+        document.getElementById("rentId").value = rentId;
+        document.getElementById("rentName").innerText = rentName;
+    }
+</script>
+
+<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

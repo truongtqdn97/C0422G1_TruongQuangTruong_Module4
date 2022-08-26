@@ -28,7 +28,7 @@
             </p>
         </div>
         <div class="col-md-2">
-            <form action="/" class="d-flex" >
+            <form action="/" class="d-flex" onchange="this.form.submit()">
                 <select name="categoryVar">
 <!--                    <option value="">Choose Category</option>-->
                     <option th:each="categoryObj : ${categories}"

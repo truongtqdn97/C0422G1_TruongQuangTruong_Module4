@@ -53,6 +53,8 @@ public class MusicController {
     @GetMapping(value = "/update/{id}")
     public String showUpdate(@PathVariable int id,
                              Model model){
+        //đẩy đối tượng music vào musicDto qua trang update.html
+
         model.addAttribute("musicDto", this.iMusicService.findById(id));
         return "update";
     }
@@ -61,13 +63,16 @@ public class MusicController {
     public String update(@ModelAttribute @Valid MusicDto musicDto,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttributes){
+        //trang html nhận giá trị của musicDto,
+        // tiến hành validate và copyProperties đè vào lại music có id ở trên
         if (bindingResult.hasErrors()){
-            return "form";
+            return "update";
         }
         Music music = new Music();
         BeanUtils.copyProperties(musicDto, music);
         this.iMusicService.save(music);
-        redirectAttributes.addFlashAttribute("msg", "Thêm mới thành công");
+        redirectAttributes.addFlashAttribute("msg", "Cập nhật thành công");
         return "redirect:/";
     }
+
 }

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Library</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/my-style.css">
+</head>
+<body>
+<div th:fragment="header" class="row mt-3">
+    <div class="col-md-12 d-flex justify-content-center">
+        <h1>Library Management</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 d-flex justify-content-center">
+        <p th:text="${msg}"></p>
+    </div>
+</div>
+<div class="container mt-5">
+    <div class="row">
+        <table class="table table-striped table-hover table-primary">
+            <tr class="table-dark neon">
+                <th>#</th>
+                <th>Tên sách</th>
+                <th>Số lượng còn lại</th>
+                <th>Chi tiết</th>
+                <th>Trả sách</th>
+            </tr>
+            <tr th:each="book, loop: ${bookList}">
+                <td th:text="${loop.count}"></td>
+                <td th:text="${book.name}"></td>
+                <td th:text="${book.quantity}"></td>
+                <td>
+                    <a th:href="@{/detail/{id}(id=${book.id})}">
+                        Xem&#8594;
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/back/{id}(id=${book.id})}">
+                        Trả sách
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <a th:href="@{/(page=${bookList.number - 1})}"
+               th:if="${bookList.hasPrevious()}"
+               class="btn btn-outline-dark">
+                &#8592;
+            </a>
+            <span th:text="${bookList.number + 1}"></span>
+            /
+            <span th:text="${bookList.totalPages}"></span>
+            <a th:href="@{/(page=${bookList.number + 1})}"
+               th:if="${bookList.hasNext()}"
+               class="btn btn-outline-dark">
+                &#8594;
+            </a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
