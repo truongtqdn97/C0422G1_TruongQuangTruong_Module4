@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/my-style.css">
+</head>
+<body>
+<div th:replace="layout :: header"></div>
+
+<div th:replace="layout :: navbar"></div>
+
+<div class="container d-flex justify-content-md-center mb-5" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-12 bg-light info">
+            <form method="post">
+                <fieldset>
+                    <legend style="text-align: center">Customer Information</legend>
+                    <table>
+                        <tr>
+                            <td>Name</td>
+                            <td>
+                                <input type="text" name="name" id="name"
+                                       class="form-control"
+                                       value="${customer.name}">
+                                <div style="color: red">nameRegex</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Birthday</td>
+                            <td>
+                                <input type="date" name="birthday" id="birthday" class="form-control"
+                                       value="${customer.birthday}">
+                                <div style="color: red">birthdayRegex</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Gender</td>
+                            <td>
+                                <select name="gender" id="gender" class="form-select">
+                                    <option value="1">Male</option>
+                                    <option value="0">Female</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Identify Card</td>
+                            <td>
+                                <input type="text" name="idCard" class="form-control"
+                                       value="${customer.identifyCard}">
+                                <div style="color: red">idCardRegex</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Phone Number</td>
+                            <td>
+                                <input type="text" name="phoneNumber" class="form-control"
+                                       value="${customer.phoneNumber}">
+                                <div style="color: red">phoneNumberRegex</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>
+                                <input type="text" name="email" class="form-control"
+                                       value="${customer.email}">
+                                <div style="color: red">emailRegex</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td><input type="text" name="address" class="form-control"
+                                       value="${customer.address}"></td>
+                        </tr>
+                        <tr>
+                            <td>Customer Type</td>
+                            <td>
+                                <select name="customerType" class="form-select">
+                                    <option value="5">-Select Customer 's Type-</option>
+                                    <option value="1">Diamond</option>
+                                    <option value="2">Platinum</option>
+                                    <option value="3">Gold</option>
+                                    <option value="4">Silver</option>
+                                    <option value="5">Member</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="submit" value="Create new Customer" class=" btn-success"></td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:replace="layout :: footer"></div>
+<script src="/js/bootstrap.js"></script>
+</body>
+</html>

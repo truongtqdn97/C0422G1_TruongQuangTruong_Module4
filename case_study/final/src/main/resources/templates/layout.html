@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Furama</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/my-style.css">
+    <link rel="stylesheet" href="/css/my-style.css">
+</head>
+<body>
+
+<div th:fragment="header" class="container my-3">
+    <div class="row">
+        <div class="col-md-6">
+            <a href="/">
+                <img src="/img/icons8-traveler-100.png" height="50">
+            </a>
+        </div>
+        <div class="col-md-6 d-flex justify-content-md-end align-items-md-center">
+            <p class="text-light">Tên người đăng nhập</p>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="navbar" class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand text-light neon" href="/">Furama</a>
+                    <button class="navbar-toggler border-light" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active text-light neon" aria-current="page" href="/">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light neon" href="/employee">Employee</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light neon" href="/customer">Customer</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-light neon"
+                                   id="navbarDropdownService" role="button" data-bs-toggle="dropdown"
+                                   aria-expanded="false">
+                                    Service
+                                </a>
+                                <ul class="dropdown-menu bg-light" aria-labelledby="navbarDropdownService">
+                                    <li><a class="dropdown-item " href="/service">List Service</a></li>
+                                    <li><a class="dropdown-item " href="/service?action=create">Add Service</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-light neon"
+                                   id="navbarDropdownContract" role="button" data-bs-toggle="dropdown"
+                                   aria-expanded="false">
+                                    Contract
+                                </a>
+                                <ul class="dropdown-menu bg-light" aria-labelledby="navbarDropdownContract">
+                                    <li><a class="dropdown-item " href="/contract">List Contract</a></li>
+                                    <li><a class="dropdown-item " href="/contract?action=create">Add Contract</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <form class="d-flex">
+                            <input class="form-control me-2" type="search" placeholder="Search"
+                                        aria-label="Search">
+                            <button class="btn btn-outline-light" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="footer" style="font-size: 14px">
+    <footer class="bg-secondary bg-gradient text-center text-lg-start text-white">
+        <div class="container-fluid pt-md-1">
+            <div class="row mt-1">
+                <div class="col-md-3 mt-4">
+                    <div class="rounded-circle bg-white d-flex align-items-center justify-content-center mb-3 mx-auto" style="width: 100px; height: 100px;">
+                        <img src="https://cdn-icons-png.flaticon.com/512/201/201623.png" height="100%"
+                             loading="lazy" />
+                    </div>
+                    <p class="text-center">FURAMA RESORT DANANG</p>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="text-uppercase mb-4">Travel Guide</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a href="#" class="text-white"><i class="fas fa-paw pe-3"></i>1. Hue ancient capital</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#" class="text-white"><i class="fas fa-paw pe-3"></i>2. Hoi An</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#" class="text-white"><i class="fas fa-paw pe-3"></i>3. My Son Sanctuary</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#" class="text-white"><i class="fas fa-paw pe-3"></i>4. Phong Nha Cave</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="text-uppercase">Contact</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <p ><i class="fas fa-map-marker-alt pe-2"></i>103 - 105 Vo Nguyen Giap Street, Khue My Ward, Ngu Hanh Son District, Danang City, Vietnam</p>
+                        </li>
+                        <li>
+                            <p><i class="fas fa-phone pe-2"></i>Tel.: 84-236-3847 333/888</p>
+                        </li>
+                        <li>
+                            <p><i class="fas fa-envelope pe-2 mb-0"></i>Email: reservation@furamavietnam.com * www.furamavietnam.com</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="text-center p-1" style="background-color: rgba(0, 0, 0, 0.2)">
+            © 2022 Copyright:
+            <a class="text-white" href="https://codegym.vn/">codegym.vn</a>
+        </div>
+    </footer>
+
+</div>
+
+<script src="../static/js/bootstrap.js"></script>
+<script src="/js/bootstrap.js"></script>
+</body>
+</html>
