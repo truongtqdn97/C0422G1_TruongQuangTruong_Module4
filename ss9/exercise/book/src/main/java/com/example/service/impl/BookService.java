@@ -14,7 +14,14 @@ public class BookService implements IBookService {
     private IBookRepository iBookRepository;
 
     @Override
-    public void save(Book book) {
+    public void backBook(Book book) {
+        book.setQuantity(book.getQuantity() + 1);
+        this.iBookRepository.save(book);
+    }
+
+    @Override
+    public void rentBook(Book book) {
+        book.setQuantity(book.getQuantity() - 1);
         this.iBookRepository.save(book);
     }
 

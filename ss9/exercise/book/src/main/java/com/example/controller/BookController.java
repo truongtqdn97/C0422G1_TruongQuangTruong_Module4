@@ -36,8 +36,7 @@ public class BookController {
         if (book.getQuantity() <= 0) {
             throw new Exception();
         } else {
-            book.setQuantity(book.getQuantity() - 1);
-            this.iBookService.save(book);
+            this.iBookService.rentBook(book);
             redirectAttributes.addFlashAttribute("msg", "Cho thuê thành công!");
             return "redirect:/";
         }
@@ -57,8 +56,7 @@ public class BookController {
         if (book.getQuantity() == book.getStock()) {
             throw new Exception();
         } else {
-            book.setQuantity(book.getQuantity() + 1);
-            this.iBookService.save(book);
+            this.iBookService.backBook(book);
             redirectAttributes.addFlashAttribute("msg", "Trả lại thành công!");
             return "redirect:/";
         }
