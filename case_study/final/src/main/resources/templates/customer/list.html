@@ -14,22 +14,19 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <a href="/customer?action=create" class="btn btn-success">Add new customer</a>
+            <a href="/customer/create" class="btn btn-success">Add new customer</a>
         </div>
-        <div class="col-md-3">
-
-        </div>
-
+        <div class="col-md-3"></div>
         <div class="col-md-6 d-flex justify-content-end">
-            <nav>
+            <div>
                 <div class="container-fluid">
-                    <form action="/customer?action=search" method="post" class="d-flex">
+                    <form action="#" method="post" class="d-flex">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
                                name="searchName">
                         <button class="btn btn-outline-success btn-light" type="submit"><strong>Search</strong></button>
                     </form>
                 </div>
-            </nav>
+            </div>
         </div>
     </div>
 </div>
@@ -37,7 +34,7 @@
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-12">
-            <table id="tableCustomer" class="table" style="width: 100%">
+            <table id="tableCustomer" class="table table-hover table-striped" style="width: 100%">
                 <thead>
                 <tr class="table-dark">
                     <th scope="col">#</th>
@@ -55,23 +52,24 @@
                 </thead>
                 <tbody>
 
-                <tr class="table-light">
-                    <td>loop.count</td>
-                    <td>customer.name</td>
-                    <td>customer.birthday</td>
-                    <td>Male/Female</td>
-                    <td>customer.identifyCard</td>
-                    <td>customer.phoneNumber</td>
-                    <td>customer.email</td>
-                    <td>customerTypeVar.customerTypeName</td>
-                    <td>customer.address</td>
+                <tr class="table-light" th:each="customer, loop : ${customerList}">
+                    <th scope="row" th:text="${loop.count}"></th>
+                    <td th:text="${customer.name}"></td>
+                    <td th:text="${customer.birthday}"></td>
+                    <td th:if="${customer.gender==0}"><span>Nữ</span></td>
+                    <td th:if="${customer.gender==1}"><span>Nam</span></td>
+                    <td th:text="${customer.identifyCard}"></td>
+                    <td th:text="${customer.phoneNumber}"></td>
+                    <td th:text="${customer.email}"></td>
+                    <td th:text="${customer.customerType.name}"></td>
+                    <td th:text="${customer.address}"></td>
                     <td>
                         <!-- Button trigger modal -->
                         <button type="button"
                                 class="btn"
                                 data-bs-toggle="modal"
                                 data-bs-target="#editButton">
-                            <a href="/customer?action=updateCustomer&pId=${customer.pId}">
+                            <a href="#">
                                 <img src="/img/edit-2.png"
                                      style="height: 25px;width: auto">
                             </a>
@@ -84,19 +82,43 @@
                                 class="btn"
                                 data-bs-toggle="modal"
                                 data-bs-target="#deleteButton"
-                                onclick="showModalDelete('${customer.pId}','${customer.name}')">
+                                th:attr="onclick=|showModalDelete('${customer.id}','${customer.name}')|">
                             <img src="/img/delete.png"
                                  style="height: 25px;width: auto">
                         </button>
                     </td>
                 </tr>
-                </c:forEach>
-
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link"
+               th:href="@{/customer/list(page=${customerList.number - 1})}"
+               th:if="${customerList.hasPrevious()}"
+               aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="btn btn-light">
+            <span th:text="${customerList.number + 1}"></span>
+            /
+            <span th:text="${customerList.totalPages}"></span>
+        </li>
+
+        <li class="page-item">
+            <a class="page-link"
+               th:href="@{/customer/list(page=${customerList.number + 1})}"
+               th:if="${customerList.hasNext()}"
+               aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
 
 <!--modal delete-->
 <div class="modal fade" id="deleteButton" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -155,7 +177,7 @@
     });
 
     window.onload = function () {
-        let mess = document.getElementById("mess").value;
+        let mess = document.getElementById("msg").value;
         document.getElementById("showMessage").innerText = mess;
         if (mess != null && mess !== "") {
             $(document).ready(function () {

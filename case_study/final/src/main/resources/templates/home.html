@@ -7,9 +7,27 @@
     <link rel="stylesheet" href="/css/my-style.css">
 </head>
 <body>
-<div th:replace="layout :: header"></div>
+<div class="intro">
+    <video autoplay loop muted playsinline class="video-bg">
+        <source src="/img/video-1.mp4">
+    </video>
+    <div class="my-nav">
+        <a href="/">
+            <img src="/img/logo.png" alt="logo" class="logo">
+        </a>
+        <div class="list">
+            <a href="/customer/list" class="neon">Customer</a>
+            <a href="#" class="neon">Employee</a>
+            <a href="#" class="neon">Service</a>
+            <a href="#" class="neon">Contract</a>
+        </div>
+    </div>
 
-<div th:replace="layout :: navbar"></div>
+    <div class="welcome">
+        <h1>FURAMA<br>Resort<br>Danang</h1>
+    </div>
+</div>
+
 
 <section class="home" id="home">
     <div class="carousel slide home-slider" id="carouselExampleControls" data-bs-ride="carousel">
@@ -21,7 +39,9 @@
                         <h3><strong>Exploring</strong></h3>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit unde ex molestias soluta
                             consequatur saepe aliquam, excepturi delectus consequuntur minus!</p>
-                        <a href="/service" class="btn2 text-light">Get Started</a>
+                        <button data-text="Get started" class="btn-learn-more">
+                            <span style="font-size: 25px">Learn more</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -33,7 +53,9 @@
                         <h3>Amazing</h3>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit unde ex molestias soluta
                             consequatur saepe aliquam, excepturi delectus consequuntur minus!</p>
-                        <a href="/service" class="btn2 text-light">Get Started</a>
+                        <button data-text="Get started" class="btn-learn-more">
+                            <span style="font-size: 25px">Learn more</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -45,7 +67,9 @@
                         <h3>New World At Furama</h3>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit unde ex molestias soluta
                             consequatur saepe aliquam, excepturi delectus consequuntur minus!</p>
-                        <a href="/service" class="btn2">Get Started</a>
+                        <button data-text="Get started" class="btn-learn-more">
+                            <span style="font-size: 25px">Learn more</span>
+                        </button>
                     </div>
                 </div>
             </div>

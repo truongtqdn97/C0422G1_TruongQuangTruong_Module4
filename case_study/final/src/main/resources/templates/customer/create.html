@@ -14,7 +14,7 @@
 <div class="container d-flex justify-content-md-center mb-5" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-12 bg-light info">
-            <form method="post">
+            <form action="/customer/create" method="post" th:object="${customer}">
                 <fieldset>
                     <legend style="text-align: center">Customer Information</legend>
                     <table>
@@ -23,22 +23,21 @@
                             <td>
                                 <input type="text" name="name" id="name"
                                        class="form-control"
-                                       value="${customer.name}">
-                                <div style="color: red">nameRegex</div>
+                                       th:field="*{name}">
                             </td>
                         </tr>
                         <tr>
                             <td>Birthday</td>
                             <td>
                                 <input type="date" name="birthday" id="birthday" class="form-control"
-                                       value="${customer.birthday}">
-                                <div style="color: red">birthdayRegex</div>
+                                       th:field="*{birthday}">
                             </td>
                         </tr>
                         <tr>
                             <td>Gender</td>
                             <td>
-                                <select name="gender" id="gender" class="form-select">
+                                <select name="gender" id="gender" class="form-select"
+                                        th:field="*{gender}">
                                     <option value="1">Male</option>
                                     <option value="0">Female</option>
                                 </select>
@@ -48,46 +47,44 @@
                             <td>Identify Card</td>
                             <td>
                                 <input type="text" name="idCard" class="form-control"
-                                       value="${customer.identifyCard}">
-                                <div style="color: red">idCardRegex</div>
+                                       th:field="*{identifyCard}">
                             </td>
                         </tr>
                         <tr>
                             <td>Phone Number</td>
                             <td>
                                 <input type="text" name="phoneNumber" class="form-control"
-                                       value="${customer.phoneNumber}">
-                                <div style="color: red">phoneNumberRegex</div>
+                                       th:field="*{phoneNumber}">
                             </td>
                         </tr>
                         <tr>
                             <td>Email</td>
                             <td>
                                 <input type="text" name="email" class="form-control"
-                                       value="${customer.email}">
-                                <div style="color: red">emailRegex</div>
+                                       th:field="*{email}">
                             </td>
                         </tr>
                         <tr>
                             <td>Address</td>
-                            <td><input type="text" name="address" class="form-control"
-                                       value="${customer.address}"></td>
+                            <td>
+                                <input type="text" name="address" class="form-control"
+                                       th:field="*{address}">
+                            </td>
                         </tr>
                         <tr>
                             <td>Customer Type</td>
                             <td>
-                                <select name="customerType" class="form-select">
-                                    <option value="5">-Select Customer 's Type-</option>
-                                    <option value="1">Diamond</option>
-                                    <option value="2">Platinum</option>
-                                    <option value="3">Gold</option>
-                                    <option value="4">Silver</option>
-                                    <option value="5">Member</option>
+                                <select name="customerType" class="form-select"
+                                        th:field="*{customerType.id}">
+                                    <option th:each="customerTypeObj : ${customerTypeList}"
+                                            th:value="${customerTypeObj.id}"
+                                            th:text="${customerTypeObj.name}">
+                                    </option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <td></td>
+                            <td><input type="reset" value="Clear"></td>
                             <td><input type="submit" value="Create new Customer" class=" btn-success"></td>
                         </tr>
                     </table>

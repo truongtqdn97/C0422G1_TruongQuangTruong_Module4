@@ -11,3 +11,43 @@
                 0 0 50px #03e9f4,
                 0 0 100px #03e9f4;
 }
+
+/*transform button*/
+.btn-learn-more{
+    background-color: transparent;
+    font-size: 20px;
+    position: relative;
+    display: inline-block;
+    border: none;
+    outline: none;
+    color: #fff;
+    cursor: pointer;
+    overflow: hidden;
+}
+.btn-learn-more::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(144deg,#af40ff, #5b42f3 50%, #00ddeb);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    transform: translateX(-105%);
+    transition: tranform .5s;
+}
+.btn-learn-more:hover::before {
+    transform: none;
+}
+.btn-learn-more span{
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid #5b42f3;
+    transition: transform 0.5s;
+}
+.btn-learn-more:hover span{
+    transform: translateX(105%);
+}
+/*transform button*/
