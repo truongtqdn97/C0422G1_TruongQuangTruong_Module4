@@ -7,7 +7,17 @@
     align-items: center;
     justify-content: center;
 }
-
+body::-webkit-scrollbar{
+    width: 7px;
+}
+body::-webkit-scrollbar-thumb{
+    background-image: linear-gradient(to bottom, #0000ff, #ff0066);
+    border-radius: 100rem;
+}
+body::-webkit-scrollbar-track{
+    background-color: #ccc;
+    border-radius: 100rem;
+}
 .my-nav{
     width: 100%;
     position: absolute;
