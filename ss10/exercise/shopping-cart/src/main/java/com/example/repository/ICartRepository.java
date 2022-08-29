@@ -1,4 +1,4 @@
-package com.example.Repository;
+package com.example.repository;
 
 import com.example.model.Cart;
 import com.example.model.Product;

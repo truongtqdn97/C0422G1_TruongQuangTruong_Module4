@@ -11,7 +11,7 @@
     <a href="/shop" class="btn btn-outline-success">Shop</a>
 </p>
 <h1>Your Cart</h1>
-<form th:action="@{/shop/pay}" th:object="${cart}" method="post">
+<form th:action="@{/shop}" th:object="${cart}" method="post">
     <h3>Total Items: <span th:text="${countItemQuantity}"></span></h3>
     <h3>Total Products: <span th:text="${countProductQuantity}"></span></h3>
     <table class="table">
@@ -37,14 +37,51 @@
             <td th:text="${countTotalPayment}"></td>
         </tr>
         <tr>
-            <td colspan="3">
-                <input type="submit" value="Pay">
+            <input type="hidden" name="totalPayment" th:value="${countTotalPayment}">
+            <td></td>
+            <td>
+                <button type="button"
+                        class="btn btn-primary"
+                        th:attr="onclick=|showPay('${countTotalPayment}')|"
+                        data-bs-toggle="modal"
+                        data-bs-target="#payModal">
+                    Pay
+                </button>
             </td>
+            <td></td>
         </tr>
     </table>
 </form>
+
+<div class="modal fade" id="payModal" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/pay" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Payment...</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Pay <span id="payShow" name="payShow"></span>
+                    <input type="hidden" name="payInput" id="payInput">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-outline-success">Pay</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+<script>
+    function showPay(payment) {
+        document.getElementById("payShow").innerText = payment;
+        document.getElementById("payInput").value = payment;
+    }
+</script>
 </body>
 </html>

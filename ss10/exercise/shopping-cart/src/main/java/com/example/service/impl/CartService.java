@@ -1,8 +1,8 @@
 package com.example.service.impl;
 
-import com.example.Repository.ICartRepository;
 import com.example.model.Cart;
 import com.example.model.Product;
+import com.example.repository.ICartRepository;
 import com.example.service.ICartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class CartService implements ICartService {
 
     @Override
     public void subProduct(Product product, Cart cart) {
-        if (this.iCartRepository.countItemQuantity(cart)==0){
+        if (this.iCartRepository.countItemQuantity(cart) == 0) {
             return;
         }
         this.iCartRepository.subProduct(product, cart);

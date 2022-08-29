@@ -1,8 +1,8 @@
-package com.example.Repository.impl;
+package com.example.repository.impl;
 
-import com.example.Repository.ICartRepository;
 import com.example.model.Cart;
 import com.example.model.Product;
+import com.example.repository.ICartRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Map;

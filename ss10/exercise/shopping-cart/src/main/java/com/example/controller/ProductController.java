@@ -1,4 +1,4 @@
-package com.example.Controller;
+package com.example.controller;
 
 import com.example.model.Cart;
 import com.example.model.Product;
@@ -40,7 +40,7 @@ public class ProductController {
             this.iCartService.addProduct(productOptional.get(), cart);
             return "redirect:/shopping-cart";
         }
-        if (action.equals("sub")){
+        if (action.equals("sub")) {
             this.iCartService.subProduct(productOptional.get(), cart);
             return "redirect:/shopping-cart";
         }
@@ -50,7 +50,7 @@ public class ProductController {
 
     @GetMapping(value = "/detail/{id}")
     public String showDetail(@PathVariable Long id,
-                             Model model){
+                             Model model) {
         Optional<Product> productOptional = productService.findById(id);
         model.addAttribute("productObj", productOptional.get());
         return "detail";
