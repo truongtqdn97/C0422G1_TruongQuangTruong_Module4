@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/blog")
+@RequestMapping(value = "/blogs")
 public class BlogRestController {
     @Autowired
     private IBlogService iBlogService;
@@ -27,16 +27,7 @@ public class BlogRestController {
     @Autowired
     private ICategoryService iCategoryService;
 
-    @GetMapping(value = "/category")
-    public ResponseEntity<List<Category>> viewCategoryList(){
-        List<Category> categories = this.iCategoryService.findAll();
-        if (categories.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(categories, HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/detail/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<Blog> viewBlog(@PathVariable int id){
         Blog blog = this.iBlogService.findById(id);
         if (blog==null){
@@ -45,7 +36,7 @@ public class BlogRestController {
         return new ResponseEntity<>(blog, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/list")
+    @GetMapping(value = "/")
     public ResponseEntity<Page<Blog>> viewBlogList(@PageableDefault(size = 2) Pageable pageable){
         Page<Blog> blogPage = this.iBlogService.findAll(pageable);
         if (!blogPage.hasContent()){

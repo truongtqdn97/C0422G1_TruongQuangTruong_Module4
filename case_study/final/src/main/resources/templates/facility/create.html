@@ -14,91 +14,101 @@
 <div class="container d-flex justify-content-md-center" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-12 bg-light info">
-            <form method="post">
+            <form method="post" action="/facility/create" th:object="${facilityObj}">
                 <fieldset>
                     <legend style="text-align: center">Service Information</legend>
                     <table>
-
                         <tr>
                             <td>Name</td>
                             <td>
-                                <input type="text" name="name" id="name" class="form-control">
-                                <div style="color: red">${nameRegex}</div>
+                                <input type="text" name="name" id="name"
+                                       class="form-control"
+                                       th:field="*{name}">
                             </td>
                         </tr>
                         <tr>
                             <td>Area</td>
                             <td>
-                                <input type="text" name="area" id="area" class="form-control">
-                                <div style="color: red">${areaRegex}</div>
+                                <input type="text" name="area" id="area"
+                                       class="form-control"
+                                       th:field="*{area}">
                             </td>
                         </tr>
                         <tr>
                             <td>Cost</td>
                             <td>
-                                <input type="number" name="cost" id="cost" class="form-control">
-                                <div style="color: red">${costRegex}</div>
+                                <input type="number" name="cost" id="cost"
+                                       class="form-control"
+                                       th:field="*{cost}">
                             </td>
                         </tr>
                         <tr>
                             <td>Max people</td>
                             <td>
-                                <input type="number" name="maxPeople" class="form-control">
-                                <div style="color: red">${maxPeopleRegex}</div>
+                                <input type="number" name="maxPeople"
+                                       class="form-control"
+                                       th:field="*{maxPeople}">
                             </td>
                         </tr>
                         <tr>
                             <td>Rental type</td>
                             <td>
-                                <select name="rentType" id="rentType" class="form-select">
-                                    <option value="">-Select Rental Type-</option>
-                                    <option value="1">Year</option>
-                                    <option value="2">Month</option>
-                                    <option value="3">Day</option>
-                                    <option value="4">Hour</option>
+                                <select name="rentType" id="rentType"
+                                        class="form-select"
+                                        th:field="*{rentType}">
+                                    <option th:each="rentTypeObj: ${rentType}"
+                                            th:value="${rentTypeObj.id}"
+                                            th:text="${rentTypeObj.name}"></option>
                                 </select>
                             </td>
                         </tr>
-
-
                         <tr>
                             <td>Service 's Type</td>
                             <td>
-                                <select name="facilityType" id="serviceType" onchange="selectServiceType(this)" class="form-select">
+                                <select name="facilityType" id="serviceType"
+                                        onchange="selectServiceType(this)"
+                                        class="form-select"
+                                        th:field="*{facilityType}">
                                     <option value="">-Select Service 's Type-</option>
-                                    <option value="1">Villa</option>
-                                    <option value="2">House</option>
-                                    <option value="3">Room</option>
+                                    <option th:each="facilityTypeObj: ${facilityType}"
+                                            th:value="${facilityTypeObj.id}"
+                                            th:text="${facilityTypeObj.name}"></option>
                                 </select>
                             </td>
                         </tr>
-
-
                         <tr id="standardRoom" style="display: none">
                             <td>Standard Room</td>
-                            <td><input type="text" name="standardRoom" class="form-control"></td>
+                            <td><input type="text" name="standardRoom"
+                                       class="form-control"
+                                       th:field="*{standardRoom}"></td>
                         </tr>
                         <tr id="descriptionOtherConvenience" style="display: none">
                             <td>Description Other Convenience</td>
-                            <td><input type="text" name="descriptionOtherConvenience" class="form-control"></td>
+                            <td><input type="text" name="descriptionOtherConvenience"
+                                       class="form-control"
+                                       th:field="*{descriptionOtherConvenience}"></td>
                         </tr>
                         <tr id="poolArea" style="display: none">
                             <td>Pool 's Area</td>
                             <td>
-                                <input type="text" name="poolArea" class="form-control">
-                                <div style="color: red">${poolAreaRegex}</div>
+                                <input type="text" name="poolArea"
+                                       class="form-control"
+                                       th:field="*{poolArea}">
                             </td>
                         </tr>
                         <tr id="numberOfFloors" style="display: none">
                             <td>Number of Floors</td>
                             <td>
-                                <input type="text" name="numberOfFloors" class="form-control">
-                                <div style="color: red">${numberOfFloors}</div>
+                                <input type="text" name="numberOfFloors"
+                                       class="form-control"
+                                       th:field="*{numberOfFloors}">
                             </td>
                         </tr>
                         <tr id="facilityFree" style="display: none">
                             <td>Facility Free</td>
-                            <td><input type="text" name="facilityFree" class="form-control"></td>
+                            <td><input type="text" name="facilityFree"
+                                       class="form-control"
+                                       th:field="*{facilityFree}" th:default="0"></td>
                         </tr>
                         <tr>
                             <td></td>

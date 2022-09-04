@@ -14,7 +14,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <a href="/service?action=create" class="btn btn-success">Add new Service</a>
+            <a href="/facility/create" class="btn btn-success">Add new Service</a>
         </div>
         <div class="col-md-3">
             <form>
@@ -55,25 +55,19 @@
                 </tr>
                 </thead>
                 <tbody>
-
-                <tr class="table-light">
-
-                    <td>count</td>
-                    <td>name</td>
-                    <td>area</td>
-                    <td>cost</td>
-                    <td>maxPeople</td>
-                    <td>
-                        rentTypeName
-                    </td>
-                    <td>
-                        facilityTypeName
-                    </td>
+                <tr class="table-light" th:each="facility, loop: ${facilities}">
+                    <th scope="row" th:text="${loop.count}">count</th>
+                    <td th:text="${facility.name}">name</td>
+                    <td th:text="${facility.area}">area</td>
+                    <td th:text="${facility.cost}">cost</td>
+                    <td th:text="${facility.maxPeople}">maxPeople</td>
+                    <td th:text="${facility.rentType.name}">rentTypeName</td>
+                    <td th:text="${facility.facilityType.name}">facilityTypeName</td>
                     <td>
                         <!-- Button trigger modal -->
                         <button type="button"
                                 class="btn">
-                            <a href="/service?action=update&fId=${facility.facilityId}">
+                            <a href="/service?action=update&id=${facility.id}">
                                 <img src="/img/edit-2.png"
                                      style="height: 25px;width: auto">
                             </a>
@@ -85,7 +79,7 @@
                                 class="btn"
                                 data-bs-toggle="modal"
                                 data-bs-target="#deleteButton"
-                                onclick="showModalDeleteService('${facility.facilityId}','${facility.name}')">
+                                onclick="showModalDeleteService('${facility.id}','${facility.name}')">
                             <img src="/img/delete.png"
                                  style="height: 25px;width: auto">
                         </button>
@@ -96,6 +90,33 @@
         </div>
     </div>
 </div>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link"
+               th:href="@{/facility/list(page=${facilities.number - 1})}"
+               th:if="${facilities.hasPrevious()}"
+               aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="btn btn-light">
+            <span th:text="${facilities.number + 1}"></span>
+            /
+            <span th:text="${facilities.totalPages}"></span>
+        </li>
+
+        <li class="page-item">
+            <a class="page-link"
+               th:href="@{/facility/list(page=${facilities.number + 1})}"
+               th:if="${facilities.hasNext()}"
+               aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
 
 <!--modal delete-->
 <div class="modal fade" id="deleteButton" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
