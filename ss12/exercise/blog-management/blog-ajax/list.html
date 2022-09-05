@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid d-flex justify-content-md-end">
+        <div class="d-flex">
+            <input class="form-control me-2"
+                   type="search" placeholder="Search"
+                   id="searchInput">
+            <button class="btn btn-outline-success"
+                    id="searchBtn"
+                    type="submit">Search
+            </button>
+        </div>
+    </div>
+</nav>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Topic</th>
+        <th scope="col">Content</th>
+        <th scope="col">Category</th>
+    </tr>
+    </thead>
+    <tbody id="list">
+    </tbody>
+</table>
+<div>
+    <button class="btn" id="more">
+        More...
+    </button>
+</div>
+
+<script src="js/jquery-3.6.0.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script>
+    let curPage = 0;
+    let topic = "";
+    let size = 0;
+
+    function getBlogPage(topic, pageNumber, size) {
+        $.ajax({
+            type: "GET",
+            // url: "http://localhost:8080/blogs/?topic=" + topic + "&page=" + pageNumber,
+            url: "http://localhost:8080/blogs/?page=" + pageNumber + "&topic=" + topic + "&size="+ size,
+            success: function (blogPage) {
+                let blogList = blogPage.content;
+                let htmlStr = "";
+                for (let i = 0; i < blogList.length; i++) {
+                    htmlStr += `<tr>
+                        <td>${i + 1}</td>
+                        <td>${blogList[i].topic}</td>
+                        <td>${blogList[i].content}</td>
+                        <td>${blogList[i].category.name}</td>
+                    </tr>`
+                }
+                $("#list").html(htmlStr);
+            },
+            error: function (resultError) {
+
+            }
+        });
+    }
+
+    $("#searchBtn").click(function () {
+        topic = $("#searchInput").val();
+        getBlogPage(topic, curPage, 2);
+    });
+
+    $(document).ready(function () {
+        getBlogPage("", 0, 2);
+    });
+
+    $("#more").click(function () {
+        size = size + 2;
+        getBlogPage(topic, curPage, size);
+    });
+</script>
+</body>
+</html>
