@@ -26,6 +26,18 @@ public class SmartphoneController {
         return new ResponseEntity<>(smartphonePage, HttpStatus.OK);
     }
 
+    @PostMapping(value = "/create")
+    public ResponseEntity<Void> createNew(@RequestBody Smartphone smartphone){
+        this.smartphoneService.save(smartphone);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/updateForm/{id}")
+    public ResponseEntity<Smartphone> updateForm(@PathVariable Long id){
+        return new ResponseEntity<>(this.smartphoneService.findById(id), HttpStatus.OK);
+    }
+
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Smartphone> deleteSmartphone(@PathVariable Long id) {
         Smartphone smartphone = smartphoneService.findById(id);

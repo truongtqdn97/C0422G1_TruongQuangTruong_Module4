@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-6">
         <table class="table table-striped">
             <thead>
             <tr class="table-dark">
@@ -23,7 +23,7 @@
             </tbody>
         </table>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <form id="add-smartphone">
             <table>
                 <tr>
@@ -45,30 +45,78 @@
             </table>
         </form>
     </div>
+    <div class="col-md-3">
+        <form id="update-smartphone">
+            <table>
+                <tr>
+                    <input type="hidden" id="idUpdate">
+                    <td>Producer:</td>
+                    <td><input type="text" id="producerUpdate" placeholder="producer"></td>
+                </tr>
+                <tr>
+                    <td>Model:</td>
+                    <td><input type="text" id="modelUpdate" placeholder="model"></td>
+                </tr>
+                <tr>
+                    <td>Price:</td>
+                    <td><input type="text" id="priceUpdate" placeholder="price"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Update" id="updateSmartPhone"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </div>
 
 <script src="js/jquery-3.6.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script>
-    function successHandler() {
+    function updatePhone(phoneId) {
         $.ajax({
             type: "GET",
-            url: "http://localhost:8080/smartphones/list",
-            success: function (data) {
-                let content = '    <tr>\n' +
-                    '        <td>Producer</td>\n' +
-                    '        <td>Model</td>\n' +
-                    '        <td>Price</td>\n' +
-                    '        <td>Delete</td>\n' +
-                    '        <td>Update</td>\n' +
-                    '    </tr>';
-                for (let i = 0; i < data.length; i++) {
-                    content += getSmartphone(data[i]);
-                }
-                $("#list").html(content);
+            url: "http://localhost:8080/smartphones/updateForm/" + phoneId,
+            success: function (resultSuccess) {
+                $("#idUpdate").val(resultSuccess.id);
+                $("#producerUpdate").val(resultSuccess.producer);
+                $("#modelUpdate").val(resultSuccess.model);
+                $("#priceUpdate").val(resultSuccess.price);
+            },
+            error: function (error) {
+                alert("fail");
             }
         });
     }
+
+    $("#updateSmartPhone").click(function () {
+        let id = $("#idUpdate").val();
+        let producer = $('#producerUpdate').val();
+        let model = $('#modelUpdate').val();
+        let price = $('#priceUpdate').val();
+        let newSmartphone = {
+            id: id,
+            producer: producer,
+            model: model,
+            price: price
+        };
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: "POST",
+            data: JSON.stringify(newSmartphone),
+            url: "http://localhost:8080/smartphones/create",
+            success: function (resultSuccess) {
+                alert("success");
+            },
+            error: function (error) {
+                alert("fail");
+            }
+        });
+    });
+
     function addNewSmartPhone() {
         let producer = $('#producer').val();
         let model = $('#model').val();
@@ -85,12 +133,16 @@
             },
             type: "POST",
             data: JSON.stringify(newSmartphone),
-            url: "http://localhost:8080/smartphones/list",
-            success: successHandler
-
+            url: "http://localhost:8080/smartphones/create",
+            success: function (resultSuccess) {
+                alert("success");
+            },
+            error: function (error) {
+                alert("fail");
+            }
         });
-        event.preventDefault();
     }
+
     let curPage = 0;
 
     function getSmartphonePage(pageNumber) {
@@ -107,17 +159,32 @@
                                     <td>${smartphoneList[i].model}</td>
                                     <td>${smartphoneList[i].price}</td>
                                     <td>
-                                    <input type="hidden"
-                                    id="deleteInput"
-                                    value="${smartphoneList[i].id}">
                                     <button class="btn"
-                                    id="deleteBtn"
-                                            type="button">Delete</button>
+                                            type="button" onclick="deletePhone(${smartphoneList[i].id})">
+                                            Delete
+                                    </button>
                                     </td>
-                                    <td><a href="#">Update</a></td>
+                                    <td>
+                                        <button class="btn"
+                                            type="button" onclick="updatePhone(${smartphoneList[i].id})">
+                                            Update
+                                    </button>
+                                    </td>
                                 </tr>`
                 }
                 $("#list").html(htmlStr);
+            },
+            error: function (resultError) {
+            }
+        });
+    }
+
+    function deletePhone(phoneId) {
+        $.ajax({
+            type: "DELETE",
+            url: `http://localhost:8080/smartphones/` + phoneId,
+            success: function (resultSuccess) {
+                getSmartphonePage(curPage);
             },
             error: function (resultError) {
             }
@@ -128,18 +195,6 @@
         getSmartphonePage(curPage);
     });
 
-    $("#deleteBtn").click(function () {
-        let smartphoneId = $("#deleteInput").val();
-        $.ajax({
-            type: "DELETE",
-            url: "http://localhost:8080/smartphones/${"+ smartphoneId +"}",
-            success: function (resultSuccess) {
-                getSmartphonePage(curPage);
-            },
-            error: function (resultError) {
-            }
-        });
-    });
 </script>
 </body>
 </html>
