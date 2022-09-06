@@ -62,7 +62,7 @@
                         <td>${blogList[i].category.name}</td>
                     </tr>`
                 }
-                $("#list").html(htmlStr);
+                $("#list").append(htmlStr);
             },
             error: function (resultError) {
             }
