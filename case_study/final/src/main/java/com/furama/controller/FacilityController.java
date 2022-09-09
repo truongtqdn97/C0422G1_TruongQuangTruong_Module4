@@ -32,6 +32,7 @@ public class FacilityController {
                            Model model) {
         model.addAttribute("rentType", this.iRentTypeService.findAll());
         model.addAttribute("facilityType", this.iFacilityTypeService.findAll());
+        model.addAttribute("facilityTypeSelect", facilityTypeSelect);
         if (!facilityTypeSelect.isPresent()){
             model.addAttribute("facilities",
                     this.iFacilityService.findAll(pageable));
@@ -60,7 +61,32 @@ public class FacilityController {
 //        facilityObj.setFacilityType(facilityType);
 
         this.iFacilityService.save(facilityObj);
-//        redirectAttributes.addFlashAttribute("msg", "Create successfully!");
+        redirectAttributes.addFlashAttribute("msg", "Create successfully!");
+        return "redirect:/facility/list";
+    }
+
+    @PostMapping(value = "/remove")
+    public String remove(@RequestParam int removeId,
+                         RedirectAttributes redirectAttributes){
+        this.iFacilityService.deleteById(removeId);
+        redirectAttributes.addFlashAttribute("msg", "Delete successfully!");
+        return "redirect:/facility/list";
+    }
+
+    @GetMapping(value = "/update/{id}")
+    public String showUpdate(@PathVariable int id,
+                             Model model){
+        model.addAttribute("facilityObj", this.iFacilityService.findById(id));
+        model.addAttribute("rentType", this.iRentTypeService.findAll());
+        model.addAttribute("facilityType", this.iFacilityTypeService.findAll());
+        return "/facility/update";
+    }
+
+    @PostMapping(value = "/update")
+    public String update(@ModelAttribute Facility facilityObj,
+                         RedirectAttributes redirectAttributes){
+        this.iFacilityService.save(facilityObj);
+        redirectAttributes.addFlashAttribute("msg", "Update successfully!");
         return "redirect:/facility/list";
     }
 }

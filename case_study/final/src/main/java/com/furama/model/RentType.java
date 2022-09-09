@@ -1,5 +1,6 @@
 package com.furama.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class RentType {
     private Integer id;
     private String name;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "rentType")
     private List<Facility> facilities;
 
