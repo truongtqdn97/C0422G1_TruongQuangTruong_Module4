@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Customer</title>
+    <link rel="shortcut icon"
+          href="https://furamavietnam.com/wp-content/uploads/2018/07/favicon.png"
+          type="image/x-icon">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/my-style.css">
 </head>
@@ -20,7 +23,7 @@
         <div class="col-md-6 d-flex justify-content-end">
             <div>
                 <div class="container-fluid">
-                    <form action="#" method="post" class="d-flex">
+                    <form action="/customer/list" method="get" class="d-flex">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
                                name="searchName">
                         <button class="btn btn-outline-success btn-light" type="submit"><strong>Search</strong></button>
@@ -65,15 +68,11 @@
                     <td th:text="${customer.address}"></td>
                     <td>
                         <!-- Button trigger modal -->
-                        <button type="button"
-                                class="btn"
-                                data-bs-toggle="modal"
-                                data-bs-target="#editButton">
-                            <a href="#">
+                        <button class="btn">
+                            <a th:href="@{/customer/showEdit/{id}(id=${customer.id})}">
                                 <img src="/img/edit-2.png"
                                      style="height: 25px;width: auto">
                             </a>
-
                         </button>
                     </td>
                     <td class="btn-delete">
@@ -97,25 +96,30 @@
     <ul class="pagination">
         <li class="page-item">
             <a class="page-link"
-               th:href="@{/customer/list(page=${customerList.number - 1})}"
+               th:href="@{/customer/list(page=${customerList.number - 1},searchName=${searchName})}"
                th:if="${customerList.hasPrevious()}"
                aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
             </a>
+            <span th:unless="${customerList.hasPrevious()}">
+                <a class="page-link">&laquo;</a>
+            </span>
         </li>
         <li class="btn btn-light">
             <span th:text="${customerList.number + 1}"></span>
             /
             <span th:text="${customerList.totalPages}"></span>
         </li>
-
         <li class="page-item">
             <a class="page-link"
-               th:href="@{/customer/list(page=${customerList.number + 1})}"
+               th:href="@{/customer/list(page=${customerList.number + 1},searchName=${searchName})}"
                th:if="${customerList.hasNext()}"
                aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>
+            <span th:unless="${customerList.hasNext()}">
+                <a class="page-link">&raquo;</a>
+            </span>
         </li>
     </ul>
 </nav>
@@ -123,18 +127,19 @@
 <!--modal delete-->
 <div class="modal fade" id="deleteButton" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="/customer?action=removeCustomer" method="post">
+        <form action="/customer/remove" method="post">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Deleting</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Are you sure about that? Delete <span id="removeCustomerName"></span>
+                    Are you sure about that?
+                    Delete <span class="fw-bold text-danger" id="removeCustomerName"></span>?
                     <input type="hidden" id="removeCustomerId" name="removeCustomerId">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">&#10006;</button>
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </div>
             </div>
@@ -142,21 +147,24 @@
     </div>
 </div>
 
+<!--call modal notice-->
+<input type="hidden" id="noticeMsgModal" th:value="${msg}">
 <!-- Modal notice -->
-<div class="modal fade" id="noticeMessage" role="dialog">
+<div class="modal fade" id="noticeMsg" role="dialog">
     <div class="modal-dialog">
-        <!-- Modal content-->
         <div class="modal-content rounded-3 shadow">
             <div class="modal-header">
                 <h5 class="modal-title">Furama 's notice</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input type="text" hidden id="mess" value="${message}">
-                <p id="showMessage"></p>
+                <span th:text="${msg}"></span>
+                <img src="https://media0.giphy.com/media/AWIm1O6FjmCtsI2Pru/giphy.gif?cid=790b7611e14412e5147aee187464a8df9dfeea3085950a9a&rid=giphy.gif&ct=s"
+                     style="width: 35px; height: auto"
+                     alt="">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">&#10004;</button>
             </div>
         </div>
     </div>
@@ -164,30 +172,23 @@
 
 <script>
     function showModalDelete(deleteCustomerId, deleteCustomerName) {
-        document.getElementById("removeCustomerName").innerText = deleteCustomerName;
-        document.getElementById("removeCustomerId").value = deleteCustomerId;
+        $('#removeCustomerName').text(deleteCustomerName);
+        $('#removeCustomerId').val(deleteCustomerId);
     }
 
-    $(document).ready(function () {
-        $('#tableCustomer').dataTable({
-            "dom": 'lrtip',
-            "lengthChange": false,
-            "pageLength": 5
-        });
-    });
-
     window.onload = function () {
-        let mess = document.getElementById("msg").value;
-        document.getElementById("showMessage").innerText = mess;
-        if (mess != null && mess !== "") {
+        let msg = $("#noticeMsgModal").val();
+        if (msg != null && msg !== "") {
             $(document).ready(function () {
-                $("#noticeMessage").modal("show");
+                $("#noticeMsg").modal("show");
             });
         }
     }
 </script>
 
 <div th:replace="layout :: footer"></div>
+
+<script src="/js/jquery-3.6.0.min.js"></script>
 <script src="/js/bootstrap.js"></script>
 </body>
 </html>

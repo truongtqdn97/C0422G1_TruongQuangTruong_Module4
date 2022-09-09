@@ -40,10 +40,10 @@
                                 <a class="nav-link active text-light neon" aria-current="page" href="/">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light neon" href="/employee">Employee</a>
+                                <a class="nav-link text-light neon" href="/employee/list">Employee</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light neon" href="/customer">Customer</a>
+                                <a class="nav-link text-light neon" href="/customer/list">Customer</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-light neon"
@@ -52,8 +52,8 @@
                                     Service
                                 </a>
                                 <ul class="dropdown-menu bg-light" aria-labelledby="navbarDropdownService">
-                                    <li><a class="dropdown-item " href="/service">List Service</a></li>
-                                    <li><a class="dropdown-item " href="/service?action=create">Add Service</a></li>
+                                    <li><a class="dropdown-item " href="/facility/list">List Service</a></li>
+                                    <li><a class="dropdown-item " href="/service/create">Add Service</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
@@ -63,8 +63,8 @@
                                     Contract
                                 </a>
                                 <ul class="dropdown-menu bg-light" aria-labelledby="navbarDropdownContract">
-                                    <li><a class="dropdown-item " href="/contract">List Contract</a></li>
-                                    <li><a class="dropdown-item " href="/contract?action=create">Add Contract</a></li>
+                                    <li><a class="dropdown-item " href="/contract/list">List Contract</a></li>
+                                    <li><a class="dropdown-item " href="/contract/create">Add Contract</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -76,7 +76,7 @@
 </div>
 
 <div th:fragment="footer" style="font-size: 14px">
-    <footer class="bg-secondary bg-gradient text-center text-lg-start text-white">
+    <footer class="bg-transparent bg-gradient text-center text-lg-start text-white">
         <div class="container-fluid pt-md-1">
             <div class="row mt-1">
                 <div class="col-md-3 mt-4">

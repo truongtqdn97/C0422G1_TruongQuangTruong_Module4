@@ -9,4 +9,5 @@ public interface IFacilityService {
     Page<Facility> findAll(Pageable pageable);
     Facility findById(int id);
     void deleteById(int id);
+    Page<Facility> findAllByFacilityType(Integer id, Pageable pageable);
 }

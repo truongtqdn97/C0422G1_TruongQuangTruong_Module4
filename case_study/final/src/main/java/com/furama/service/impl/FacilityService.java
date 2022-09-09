@@ -32,4 +32,9 @@ public class FacilityService implements IFacilityService {
     public void deleteById(int id) {
         this.iFacilityRepository.deleteById(id);
     }
+
+    @Override
+    public Page<Facility> findAllByFacilityType(Integer id, Pageable pageable) {
+        return this.iFacilityRepository.findAllByFacilityType_Id(id, pageable);
+    }
 }

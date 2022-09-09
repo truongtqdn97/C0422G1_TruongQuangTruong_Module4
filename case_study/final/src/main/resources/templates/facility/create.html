@@ -108,7 +108,7 @@
                             <td>Facility Free</td>
                             <td><input type="text" name="facilityFree"
                                        class="form-control"
-                                       th:field="*{facilityFree}" th:default="0"></td>
+                                       th:field="*{facilityFree}"></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -131,6 +131,8 @@
                 document.getElementById("poolArea").style.display = "table-row";
                 document.getElementById("numberOfFloors").style.display = "table-row";
                 document.getElementById("facilityFree").style.display = "none";
+
+                $('#facilityFree').val("");
                 break;
             case "2":
                 document.getElementById("standardRoom").style.display = "table-row";
@@ -138,6 +140,9 @@
                 document.getElementById("poolArea").style.display = "none";
                 document.getElementById("numberOfFloors").style.display = "table-row";
                 document.getElementById("facilityFree").style.display = "none";
+
+                $('#poolArea').val(0);
+                $('#facilityFree').val("");
                 break;
             case "3":
                 document.getElementById("standardRoom").style.display = "none";
@@ -145,6 +150,11 @@
                 document.getElementById("poolArea").style.display = "none";
                 document.getElementById("numberOfFloors").style.display = "none";
                 document.getElementById("facilityFree").style.display = "table-row";
+
+                $('#standardRoom').val("");
+                $('#descriptionOtherConvenience').val("");
+                $('#poolArea').val(0);
+                $('#numberOfFloors').val(0);
                 break;
             default:
                 document.getElementById("standardRoom").style.display = "none";
@@ -157,6 +167,7 @@
 </script>
 
 <div th:replace="layout :: footer"></div>
+<script src="/js/jquery-3.6.0.min.js"></script>
 <script src="/js/bootstrap.js"></script>
 </body>
 </html>

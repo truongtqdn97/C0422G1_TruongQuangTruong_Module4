@@ -14,27 +14,28 @@
 <div class="container d-flex justify-content-md-center mb-5" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-12 bg-light info">
-            <form method="post">
+            <form method="post" action="/customer/update" th:object="${customerObj}">
                 <fieldset>
-                    <legend style="text-align: center">Edit Customer Information</legend>
+                    <legend style="text-align: center">Update Customer Information</legend>
                     <table>
+                        <input type="hidden" th:field="*{id}">
                         <tr>
                             <td>Name</td>
                             <td><input type="text" name="name"
                                        id="name" class="form-control"
-                                       value="${customer.name}"></td>
+                                       th:field="*{name}"></td>
                         </tr>
                         <tr>
                             <td>Birthday</td>
                             <td><input type="date" name="birthday"
                                        id="birthday" class="form-control"
-                                       value=""></td>
+                                       th:field="*{birthday}"></td>
                         </tr>
                         <tr>
                             <td>Gender</td>
                             <td>
-                                <select name="gender" class="form-select">
-                                    <option value="1" selected>Male</option>
+                                <select name="gender" class="form-select" th:field="*{gender}">
+                                    <option value="1">Male</option>
                                     <option value="0">Female</option>
                                 </select>
                             </td>
@@ -43,39 +44,43 @@
                             <td>Identify Card</td>
                             <td><input type="text" name="idCard"
                                        class="form-control"
-                                       value=""></td>
+                                       th:field="*{identifyCard}"></td>
                         </tr>
                         <tr>
                             <td>Phone Number</td>
                             <td><input type="text" name="phoneNumber"
                                        class="form-control"
-                                       value=""></td>
+                                       th:field="*{phoneNumber}"></td>
                         </tr>
                         <tr>
                             <td>Email</td>
                             <td><input type="text" name="email"
                                        class="form-control"
-                                       value=""></td>
+                                       th:field="*{email}"></td>
                         </tr>
                         <tr>
                             <td>Address</td>
                             <td><input type="text" name="address"
                                        class="form-control"
-                                       value=""></td>
+                                       th:field="*{address}"></td>
                         </tr>
                         <tr>
                             <td>Customer Type</td>
 
                             <td>
-                                <select name="customerType" class="form-select">
-                                    <option value="" selected>customerTypeName</option>
-                                    <option value="">customerTypeName</option>
+                                <select name="customerType" class="form-select"
+                                        th:field="*{customerType.id}">
+                                    <option th:each="customerTypeObj : ${customerTypeList}"
+                                            th:value="${customerTypeObj.id}"
+                                            th:text="${customerTypeObj.name}">
+                                    </option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td><input type="submit" value="Edit Customer" class=" btn-success"></td>
+                            <td><input type="reset" class="btn btn-outline-danger" value="Clear"></td>
+                            <td><input type="submit" value="Edit Customer"
+                                       class="btn btn-outline-success"></td>
                         </tr>
                     </table>
                 </fieldset>
