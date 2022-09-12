@@ -1,6 +1,6 @@
 package com.furama.service;
 
-import com.furama.model.RentType;
+import com.furama.model.facility.RentType;
 
 import java.util.List;
 

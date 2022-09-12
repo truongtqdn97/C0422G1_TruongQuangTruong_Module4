@@ -1,6 +1,6 @@
 package com.furama.service;
 
-import com.furama.model.CustomerType;
+import com.furama.model.customer.CustomerType;
 
 import java.util.List;
 

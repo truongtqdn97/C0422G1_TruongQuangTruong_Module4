@@ -1,6 +1,6 @@
 package com.furama.repository;
 
-import com.furama.model.Customer;
+import com.furama.model.customer.Customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

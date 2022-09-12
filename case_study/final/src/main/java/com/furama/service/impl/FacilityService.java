@@ -1,8 +1,7 @@
 package com.furama.service.impl;
 
-import com.furama.model.Facility;
+import com.furama.model.facility.Facility;
 import com.furama.repository.IFacilityRepository;
-import com.furama.repository.IFacilityTypeRepository;
 import com.furama.service.IFacilityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

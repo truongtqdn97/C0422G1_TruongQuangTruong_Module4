@@ -1,11 +1,12 @@
 package com.furama.controller;
 
-import com.furama.model.Facility;
+import com.furama.model.facility.Facility;
 import com.furama.service.IFacilityService;
 import com.furama.service.IFacilityTypeService;
 import com.furama.service.IRentTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +29,7 @@ public class FacilityController {
 
     @GetMapping(value = "/list")
     public String viewList(@RequestParam Optional<Integer> facilityTypeSelect,
-                           @PageableDefault(value = 5) Pageable pageable,
+                           @PageableDefault(value = 5, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
                            Model model) {
         model.addAttribute("rentType", this.iRentTypeService.findAll());
         model.addAttribute("facilityType", this.iFacilityTypeService.findAll());

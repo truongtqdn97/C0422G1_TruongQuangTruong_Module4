@@ -1,6 +1,6 @@
 package com.furama.controller;
 
-import com.furama.model.Facility;
+import com.furama.model.facility.Facility;
 import com.furama.service.IFacilityService;
 import com.furama.service.IFacilityTypeService;
 import com.furama.service.IRentTypeService;

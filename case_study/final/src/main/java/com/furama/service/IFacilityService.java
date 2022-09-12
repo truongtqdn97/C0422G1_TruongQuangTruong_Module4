@@ -1,6 +1,6 @@
 package com.furama.service;
 
-import com.furama.model.Facility;
+import com.furama.model.facility.Facility;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

@@ -1,6 +1,5 @@
-package com.furama.model;
+package com.furama.model.customer;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,20 +7,18 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class RentType {
+@Table
+public class CustomerType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "rentType")
-    private List<Facility> facilities;
-
+    @OneToMany(mappedBy = "customerType")
+    private List<Customer> customers;
 }

@@ -1,6 +1,6 @@
-package com.furama.model;
+package com.furama.model.employee;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,13 +14,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class FacilityType {
+public class Division {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "facilityType")
-    private List<Facility> facilities;
+    @OneToMany(mappedBy = "division")
+    private List<Employee> employeeSet;
 }
