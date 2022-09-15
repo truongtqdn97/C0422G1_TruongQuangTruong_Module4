@@ -38,6 +38,6 @@ public class Customer{
     private String address;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Contract> contracts;
 }

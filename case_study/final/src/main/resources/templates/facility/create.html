@@ -14,7 +14,7 @@
 <div class="container d-flex justify-content-md-center" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-12 bg-light info">
-            <form method="post" action="/facility/create" th:object="${facilityObj}">
+            <form method="post" action="/facility/create" th:object="${facilityDto}">
                 <fieldset>
                     <legend style="text-align: center">Service Information</legend>
                     <table>
@@ -24,6 +24,7 @@
                                 <input type="text" name="name" id="name"
                                        class="form-control"
                                        th:field="*{name}">
+                                <div class="text-danger" th:errors="*{name}"></div>
                             </td>
                         </tr>
                         <tr>
@@ -32,6 +33,7 @@
                                 <input type="text" name="area" id="area"
                                        class="form-control"
                                        th:field="*{area}">
+                                <div class="text-danger" th:errors="*{area}"></div>
                             </td>
                         </tr>
                         <tr>
@@ -40,6 +42,7 @@
                                 <input type="number" name="cost" id="cost"
                                        class="form-control"
                                        th:field="*{cost}">
+                                <div class="text-danger" th:errors="*{cost}"></div>
                             </td>
                         </tr>
                         <tr>
@@ -48,6 +51,7 @@
                                 <input type="number" name="maxPeople"
                                        class="form-control"
                                        th:field="*{maxPeople}">
+                                <div class="text-danger" th:errors="*{maxPeople}"></div>
                             </td>
                         </tr>
                         <tr>
@@ -100,8 +104,10 @@
                             <td>Number of Floors</td>
                             <td>
                                 <input type="text" name="numberOfFloors"
+                                       value=""
                                        class="form-control"
                                        th:field="*{numberOfFloors}">
+                                <div class="text-danger" th:errors="*{numberOfFloors}"></div>
                             </td>
                         </tr>
                         <tr id="facilityFree" style="display: none">

@@ -27,4 +27,9 @@ public class ContractService implements IContractService {
     public void deleteById(int id) {
         this.iContractRepository.deleteById(id);
     }
+
+    @Override
+    public void save(Contract contract) {
+        this.iContractRepository.save(contract);
+    }
 }

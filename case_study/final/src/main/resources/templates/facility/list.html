@@ -24,7 +24,8 @@
                     id="facilityTypeSelect"
                     class="form-select bg-transparent text-light"
                     onchange="getVal(this);">
-                <option value="" class="text-dark">Select Facility Type</option>
+                <option th:value="0" class="text-dark">Select Facility Type</option>
+                <option th:value="0" class="text-dark">All Facility Type</option>
                 <option th:each="facilityTypeObj: ${facilityType}"
                         th:value="${facilityTypeObj.id}"
                         th:text="${facilityTypeObj.name}"

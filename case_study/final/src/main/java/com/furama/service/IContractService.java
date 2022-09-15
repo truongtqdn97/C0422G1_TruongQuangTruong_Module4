@@ -10,4 +10,6 @@ public interface IContractService {
     Contract findById(int id);
 
     void deleteById(int id);
+
+    void save(Contract contract);
 }

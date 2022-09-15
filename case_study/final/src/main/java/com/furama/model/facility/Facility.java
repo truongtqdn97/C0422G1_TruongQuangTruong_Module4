@@ -25,12 +25,12 @@ public class Facility {
     private double cost;
     private int maxPeople;
 
-    @JsonBackReference
+//    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "rentType", referencedColumnName = "id")
     private RentType rentType;
 
-    @JsonBackReference
+//    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "facilityType", referencedColumnName = "id")
     private FacilityType facilityType;
